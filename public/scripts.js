@@ -1,12 +1,18 @@
 var hasOpp = false;
+
 var rpsVersion = true;
 
 async function play() {
     var winner = document.getElementById("winner");
-    var rand_move = document.getElementById("rand_move")
+
+    var rand_move = document.getElementById("rand_move");
+
     var player = document.getElementById("playerMove");
+
     var opp = document.getElementById("opponentMove");
-    var oppGame = document.getElementById("opponentGame")
+
+    var oppGame = document.getElementById("opponentGame");
+
     if (rpsVersion && hasOpp) {
         var move;
         var radios = document.getElementsByName("move");
@@ -79,8 +85,11 @@ async function restart() {
 
 async function oppChange() {
     const oppCheck = document.querySelector('#opponent');
+
     const rpsSect = document.getElementById("rps");
+
     const rpslsSect = document.getElementById("rpsls")
+
     console.log(oppCheck.checked)
     rpsSect.className = "active";
     if (oppCheck.checked && rpsVersion) {
