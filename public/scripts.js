@@ -1,17 +1,6 @@
-// If you would like to see some examples of similar code to make an interface interact with an API, 
-// check out the coin-server example from a previous COMP 426 semester.
-// https://github.com/jdmar3/coinserver
+
 var hasOpponent = false;
 var rpsVersion = true;
-
-// let opponent = document.getElementById("opponent");
-// opponent.addEventListener("change", opponentChange)
-
-// Get the button that opens the modal
-async function closepopup() {
-    var modal = document.getElementById("modal");
-    modal.style.display = "none";
-}
 
 
 async function play() {
