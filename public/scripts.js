@@ -59,9 +59,13 @@ async function play() {
     modal.style.display = "block";
 }
 
-async function reset() {
-    location.reload();
+
+async function rpsSelected() {
+    rpsVersion = true;
+    oppChange();
+    console.log(rpsVersion);
 }
+
 
 async function rpslsSelected() {
     rpsVersion = false;
@@ -69,10 +73,8 @@ async function rpslsSelected() {
     console.log(rpsVersion);
 }
 
-async function rpsSelected() {
-    rpsVersion = true;
-    oppChange();
-    console.log(rpsVersion);
+async function restart() {
+    location.reload();
 }
 
 async function oppChange() {
