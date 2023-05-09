@@ -1,85 +1,78 @@
-<html lang="en-us">
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>Rock, Paper, Scissors</title>
+        <meta charset="UTF-8">
+        <title>Rock Paper Scissors</title>
         <!-- Link to your script file(s) and CSS in here somewhere -->
-        <link href="./styles.css" rel="stylesheet">
-		<script src="./scripts.js"></script>
+        <script src="scripts.js"></script>
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body onload="onPageLoad()">
-        <table>
-            <tbody>
-            <tr>
-                <td>
-                    <form id="input">
-                        <h2>Select your game!</h2>
-                        <input type="radio" id="rps" name="gameType" value="rps" onclick="toggleShots()">
-                        <label for="rps">Rock, Paper, Scissors!</label>
-                        <input type="radio" id="rpsls" name="gameType" value="rpsls" onclick="toggleShots()">
-                        <label for="rpsls">Rock, Paper, Scissors, Lizard, Spock!</label>
-                        <h3>Click Below If You Would Like To Play Against A Computer</h3>
-                        <input type="checkbox" id="opponent" name="opponentSelect" value="opponent" onclick="toggleShots()">
-                        <label for="opponent">Play against a computer?</label>
-                        <div id="shots">
-                            <h4>Make Your Choice!</h4>
-                            <input type="radio" id="rock" name="shot" value="rock" class="rpsShot" >
-                            <label class="shot">Rock</label>
-                            <input type="radio" id="paper" name="shot" value="paper" class="rpsShot">
-                            <label class="shot">Paper</label>
-                            <input type="radio" id="scissors" name="shot" value="scissors" class="rpsShot">
-                            <label class="shot">Scissors</label>
-                            <div id="rpslsShots">
-                                <input type="radio" id="lizard" name="shot" value="lizard" class="rpslsShot">
-                                <label id="lizardLab" class="rpslsShot">Lizard</label>
-                                <input type="radio" id="spock" name="shot" value="spock" class="rpslsShot">
-                                <label id="spockLab" class="rpslsShot">Spock</label>
-                            </div>
-                        </div>
-                        <button type="submit" style="display:none">Submit</button>
-                    </form>
-                    <button type="button" id="play" onclick="playGame()">Play</button>
-                    <button type="button" id="startOver" onclick="startOver()">Start Over</button>
-                    <button type="button" id="help" onclick="help()">Rules</button>
-                    <p id="results" class="results">Results</p>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <h4 id="shotImgLab">You:</h4>
-                                <img src="img/rock.jpg" alt="image" id="shotImg" class="shot">
-                            </td>
-                            <td>
-                                <h4 id="oppShotImgLab">Opponent:</h4>
-                                <img src="img/rock.jpg" alt="image" id="oppShotImg" class="shot">
-                            </td>
-                        </tr>
-                    </tbody>
-                    </table>
-                </td>
-                <td>
-                    <div id="rules">
-                        <h3>Rules for Rock Paper Scissors:</h3>
-                            <ul>
-                                <li>Scissors CUTS Paper</li>
-                                <li>Paper COVERS Rock</li>
-                                <li>Rock CRUSHES Scissors</li>
-                            </ul>
-                            <h3>Rules for the Lizard-Spock Expansion of Rock Paper Scissors:</h3>
-                            <ul>
-                                <li>Scissors CUTS Paper</li>
-                                <li>Paper COVERS Rock</li>
-                                <li>Rock SMOOSHES Lizard</li>
-                                <li>Lizard POISONS Spock</li>
-                                <li>Spock SMASHES Scissors</li>
-                                <li>Scissors DECAPITATES Lizard</li>
-                                <li>Lizard EATS Paper</li>
-                                <li>Paper DISPROVES Spock</li>
-                                <li>Spock VAPORIZES Rock</li>
-                                <li>Rock CRUSHES Scissors</li>
-                            </ul>
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-        </table>
-   </body>
+    <body>
+        <h1>ROCK PAPER SCISSORS</h1>
+        <div class="left">
+            <strong>Select your version of the game:</strong>
+            <br>
+            <input type="radio" id="rpsSelect" name="version" onclick="rpsSelected()" value="RPS">
+            <label for="rpsSelect">Play Rock Paper Scissors</label><br>
+            <input type="radio" id="rpslsSelect" name="version" onclick="rpslsSelected()" value="RPSLS">
+            <label for="rpslsSelect">Play Rock Paper Scissors Lizard Spock</label><br>
+            <br>
+            <input type="checkbox" id="opponent" name="opponent" onchange="opponentChange()" value="Opponent">
+            <label for="opponent">Play against an opponent</label><br>
+            <br>
+            <div id="rps" class="inactive">
+                <strong>Choose your move:</strong>
+                <br>
+                <input type="radio" id="rock" name="move" value="rock">
+                <label for="rock">Rock</label><br>
+                <input id="paper" type="radio" name="move" value="paper">
+                <label for="paper">Paper</label><br>
+                <input id="scissors" type="radio" name="move" value="scissors">
+                <label for="scissors">Scissors</label><br>
+            </div>
+            <div id="rpsls" class="inactive">
+                <input type="radio" id="lizard" name="move" value="lizard">
+                <label for="lizard">Lizard</label><br>
+                <input type="radio" id="spock" name="move" value="spock">
+                <label for="spock">Spock</label><br>
+            </div>
+            <br>
+        </div>
+
+        <button type="button" id="play" onclick="play()">Play!</button>
+        <button type="button" id="reset" onclick="reset()">Reset</button>
+        <button type="button" class="rules" onclick="openRules()">Rules</button>
+
+        <div id="modal" class="popup">
+            <div class="results">
+                <span onclick="closepopup()" class="close">&times;</span>
+                <div class="inactive" id="opponentGame">
+                    <p id="playerMove"></p>
+                    <p id="opponentMove"></p>
+                    <p id="winner"></p>
+                </div>
+                <p class="inactive" id="rand_move"></p>
+                <div class="inactive" id="rules">
+                    <strong>Rules for Rock Paper Scissors</strong>
+                    <p>Scissors CUTS Paper</p>
+                    <p>Paper COVERS Rock</p>
+                    <p>Rock CRUSHES Scissors</p>
+                    <strong>Rules for Rock Paper Scissors Lizard Spock</strong>
+                    <p>Scissors CUTS Paper</p>
+                    <p>Paper COVERS Rock</p>
+                    <p>Rock SMOOSHES Lizard</p>
+                    <p>Lizard POISONS Spock</p>
+                    <p>Spock SMASHES Scissors</p>
+                    <p>Scissors DECAPITATES Lizard</p>
+                    <p>Lizard EATS Paper</p>
+                    <p>Paper DISPROVES Spock</p>
+                    <p>Spock VAPORIZES Rock</p>
+                    <p>Rock CRUSHES Scissors</p>
+                </div>
+            </div>
+        </div>
+    <!-- Your interface markup goes here -->
+    <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
+
+    </body>
 </html>

@@ -1,89 +1,129 @@
 // If you would like to see some examples of similar code to make an interface interact with an API, 
 // check out the coin-server example from a previous COMP 426 semester.
 // https://github.com/jdmar3/coinserver
+var hasOpponent = false;
+var rpsVersion = true;
 
-function onPageLoad() {
-    document.getElementById("shots").style.display = "none"
-    document.getElementById("results").style.display = "none"
-    document.getElementById("rules").style.display = "none"
-    document.getElementById("shotImg").style.display = "none"
-    document.getElementById("oppShotImg").style.display = "none"
-    document.getElementById("shotImgLab").style.display = "none"
-    document.getElementById("oppShotImgLab").style.display = "none"
+// let opponent = document.getElementById("opponent");
+// opponent.addEventListener("change", opponentChange)
+
+// Get the button that opens the modal
+async function closepopup() {
+    var modal = document.getElementById("modal");
+    modal.style.display = "none";
 }
 
-function toggleShots() {
-    let oppCheck = document.getElementById('opponent');
-    let rpslsCheck = document.getElementById("rpsls");
-    if (oppCheck.checked == true) {
-        document.getElementById("shots").style.display = "block"
-        if (rpslsCheck.checked == false) {
-            document.getElementById("rpslsShots").style.display = "none"
-        } else {
-            document.getElementById("rpslsShots").style.display = "inline"
+
+async function play() {
+    var player = document.getElementById("playerMove");
+    var opponent = document.getElementById("opponentMove");
+    var winner = document.getElementById("winner");
+    var rand_move = document.getElementById("rand_move")
+    var opponentGame = document.getElementById("opponentGame")
+    var rules = document.getElementById("rules")
+    if (rpsVersion && hasOpponent) {
+        var move;
+        var radios = document.getElementsByName("move");
+        for (var i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) {
+                move = radios[i].value;
+                break;
+            }
         }
-    } else {
-        document.getElementById("shots").style.display = "none"
+        const response = await fetch(`/app/rps/play/${move}`);
+        const data = await response.json();
+        player.innerHTML = `Player move: ${data.player}`;
+        opponent.innerHTML = `Opponent move: ${data.opponent}`;
+        winner.innerHTML = `Result: ${data.result}`;
+        opponentGame.className = "active";
+        rand_move.className = "inactive";
+        rules.className = "inactive";
     }
+    else if (rpsVersion) {
+        const response = await fetch(`/app/rps/play`);
+        const data = await response.json();
+        rand_move.innerHTML = `Move: ${data.player}`;
+        opponentGame.className = "inactive"
+        rand_move.className = "active"
+        rules.className = "inactive";
+    }
+    else if (hasOpponent) {
+        var move;
+        var radios = document.getElementsByName("move");
+        for (var i = 0, length = radios.length; i < length; i++) {
+            if (radios[i].checked) {
+                move = radios[i].value;
+                break;
+            }
+        }
+        const response = await fetch(`/app/rpsls/play/${move}`);
+        const data = await response.json();
+        player.innerHTML = `Player move: ${data.player}`;
+        opponent.innerHTML = `Opponent move: ${data.opponent}`;
+        winner.innerHTML = `Result: ${data.result}`;
+        opponentGame.className = "active"
+        rand_move.className = "inactive"
+        rules.className = "inactive";
+    }
+    else {
+        const response = await fetch(`/app/rpsls/play`);
+        const data = await response.json();
+        rand_move.innerHTML = `Move: ${data.player}`;
+        opponentGame.className = "inactive"
+        rand_move.className = "active"
+        rules.className = "inactive";
+    }
+    var modal = document.getElementById("modal");
+    modal.style.display = "block";
 }
 
-function startOver() {
-    document.getElementById("input").reset()
-    document.getElementById("shots").style.display = "none"
-    document.getElementById("results").style.display = "none"
-    document.getElementById("rules").style.display = "none"
-    document.getElementById("shotImg").style.display = "none"
-    document.getElementById("oppShotImg").style.display = "none"
-    document.getElementById("shotImgLab").style.display = "none"
-    document.getElementById("oppShotImgLab").style.display = "none"
-
+async function openRules() {
+    var rand_move = document.getElementById("rand_move");
+    var opponentGame = document.getElementById("opponentGame");
+    var rules = document.getElementById("rules");
+    rand_move.className = "inactive";
+    opponentGame.className = "inactive";
+    rules.className = "active";
+    var modal = document.getElementById("modal");
+    modal.style.display = "block";
 }
 
-function help() {
-    if (document.getElementById("rules").style.display == "none") {
-        document.getElementById("rules").style.display = "block";
-    } else {
-        document.getElementById("rules").style.display = "none";
-    }
+async function reset() {
+    location.reload();
 }
 
-async function playGame () {
-    let gameType = "rps"
-    for (var x of document.getElementsByName("gameType")) {
-        if (x.checked == true) { gameType = x.id }
-    }
-    
-    let shot = "rock"
-    for (var x of document.getElementsByName("shot")) {
-        if (x.checked == true) { shot = x.id }
-    }
-
-    let baseurl = window.location.href.concat('app/')
-    let url = baseurl.concat(gameType.concat('/play/'))
-
-    let oppCheck = document.getElementById('opponent').checked
-    if (oppCheck) { url = url.concat(shot) }
-
-    let response = await fetch(url)
-    let result = await response.json()
-
-    resultString = 'You selected ' + result.player
-
-    document.getElementById("shotImg").setAttribute("src", "img/"+result.player+".jpg");
-    document.getElementById("shotImgLab").style.display = "block"
-    document.getElementById("shotImg").style.display = "inline"
-    document.getElementById("oppShotImg").style.display = "none"
-    document.getElementById("oppShotImgLab").style.display = "none"
-
-    if (oppCheck) {
-        resultString = resultString + ' and your opponent selected ' + result.opponent + '. Result: ' + result.result;
-        document.getElementById("oppShotImg").setAttribute("src", "img/"+result.opponent+".jpg");
-        document.getElementById("oppShotImgLab").style.display = "block"
-        document.getElementById("oppShotImg").style.display = "inline"
-    }
-
-    document.getElementById("results").innerText = resultString
-    document.getElementById("results").style.display = "block"
+async function rpslsSelected() {
+    rpsVersion = false;
+    opponentChange();
+    console.log(rpsVersion);
 }
 
-// Inspiration take from mraymar45 at https://github.com/comp426-2023-spring/e02-mraymer45
+async function rpsSelected() {
+    rpsVersion = true;
+    opponentChange();
+    console.log(rpsVersion);
+}
+
+async function opponentChange() {
+    const opponentCheck = document.querySelector('#opponent');
+    const rpsSection = document.getElementById("rps");
+    const rpslsSection = document.getElementById("rpsls")
+    console.log(opponentCheck.checked)
+    rpsSection.className = "active";
+    if (opponentCheck.checked && rpsVersion) {
+        rpsSection.className = "active";
+        rpslsSection.className = "inactive";
+        hasOpponent = true;
+    }
+    else if (opponentCheck.checked && !rpsVersion) {
+        rpsSection.className = "active";
+        rpslsSection.className = "active";
+        hasOpponent = true;
+    }
+    else {
+        rpsSection.className = "inactive";
+        rpslsSection.className = "inactive";
+        hasOpponent = false;
+    }
+
+}
