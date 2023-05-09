@@ -117,6 +117,8 @@ app.get('*', (req, res) => {
     res.status(404).send('404 NOT FOUND');
 });
 
+
+
 // Create app listener
 const server = app.listen(port)
 // Create a log entry on start
