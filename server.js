@@ -103,7 +103,6 @@ app.get('/app/rpsls/play/:shot', (req, res) => {
     res.status(200).send(JSON.stringify(rpsls(req.params.shot))).end();
 })
     
-
 // Create and update access log
 // The morgan format below is the Apache Foundation combined format but with ISO8601 dates
 app.use(morgan(':remote-addr - :remote-user [:date[iso]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"',
