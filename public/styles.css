@@ -1,88 +1,36 @@
-
 body {
-    font-family: 'Times New Roman', Times, serif, sans-serif;
-    text-align: center;
-    background-color: #088F8F;
+    background-color: rgb(190, 129, 255);
 }
 
-h1 {
-    font-size: 4em;
-    margin-top: 2em;
+
+p.results {
+    font-size: 16px; /* Same as "font-size: larger" */
+    font-weight: 500; /* Same as "font-weight: 500" */
+    font-family: 'Times New Roman'; /* Same as "font-family" */
+    border-style: groove; /* Same as "border-style: groove" */
+    border-radius: 20px; /* Updated to 20px to match the button style */
+    border-width: 5px; /* Updated to 5px to match the button style */
+    border-color: rgb(127, 127, 255); /* Same as "border-color: blue" */
+    padding: 10px; 
+    margin: 10px 0; 
 }
 
-h2 {
-    font-size: 2em;
-    font-weight: bold;
-    margin-bottom: 1em;
-    text-transform: uppercase;
+img.shot {
+    width: 300px;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 2em;
-}
-
-fieldset {
+button {
+    background-color: #2289ca; /* Matte gray */
     border: none;
-    margin: 0;
-    padding: 0;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
 }
 
-legend {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 0.5em;
-    text-transform: uppercase;
-}
-
-label {
-    display: flex;
-    align-items: center;
-    margin: 0.5em;
-}
-
-input[type="radio"] {
-    margin-right: 0.5em;
-}
-
-#gameboard {
-    background-color: #088F8F;
-    display: none;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 2em;
-}
-
-#gameboard button {
-    background-color: #8f086d;
-    border: 2px solid #880808;
-    border-radius: 5px;
-    font-size: 2em;
-    font-weight: bold;
-    margin: 1em;
-    padding: 1em 1em;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    width: 150px;
-}
-
-#gameboard button:hover {
-    background-color: #088F8F;
-    color: #880808;
-    cursor: pointer;
-}
-
-#gameboard button:active {
-    transform: scale(1);
-}
-
-#results{
-    font-size: 3em;
-    margin-top: 3em;
-}
-
-#play-again {
-    margin-top: 2em;
+button:hover {
+    background-color: #f58abc; /* Light green */
 }
