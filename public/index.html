@@ -3,7 +3,6 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock Paper Scissors</title>
-        <!-- Link to your script file(s) and CSS in here somewhere -->
         <script src="scripts.js"></script>
         <link rel="stylesheet" href="styles.css">
     </head>
@@ -21,28 +20,28 @@
             <label for="rpslsSelect">PLAY ROCK PAPER SCISSORS LIZARD SPOCK!</label><br>
             <br>
             <input type="checkbox" id="opponent" name="opponent" onchange="opponentChange()" value="Opponent">
-            <label for="opponent">Play against an opponent</label><br>
+            <label for="opponent">PLAY AGAINST OPPONENT!</label><br>
             <br>
             <div id="rps" class="inactive">
-                <strong>Choose your move:</strong>
+                <strong>WHAT'S YOUR NEXT MOVE?</strong>
                 <br>
-                <input type="radio" id="rock" name="move" value="rock">
-                <label for="rock">Rock</label><br>
+                <input id="rock" type="radio" name="move" value="rock">
+                <label for="rock">ROCK!</label><br>
                 <input id="paper" type="radio" name="move" value="paper">
-                <label for="paper">Paper</label><br>
+                <label for="paper">PAPER!</label><br>
                 <input id="scissors" type="radio" name="move" value="scissors">
-                <label for="scissors">Scissors</label><br>
+                <label for="scissors">SCISSORS!</label><br>
             </div>
             <div id="rpsls" class="inactive">
-                <input type="radio" id="lizard" name="move" value="lizard">
-                <label for="lizard">Lizard</label><br>
+                <input id="lizard" type="radio" name="move" value="lizard">
+                <label for="lizard">LIZARD!</label><br>
                 <input type="radio" id="spock" name="move" value="spock">
-                <label for="spock">Spock</label><br>
+                <label for="spock">SPOCK!</label><br>
             </div>
             <br>
         </div>
         <button type="button" id="play" onclick="play()">Play!</button>
-        <button type="button" id="reset" onclick="reset()">Reset</button>
+        <button type="button" id="reset" onclick="reset()">Start Over!</button>
         
     </body>
 </html>
