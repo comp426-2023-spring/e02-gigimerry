@@ -79,23 +79,23 @@ async function rpsSelected() {
 
 async function opponentChange() {
     const opponentCheck = document.querySelector('#opponent');
-    const rpsSection = document.getElementById("rps");
-    const rpslsSection = document.getElementById("rpsls")
+    const rpsSect = document.getElementById("rps");
+    const rpslsSect = document.getElementById("rpsls")
     console.log(opponentCheck.checked)
-    rpsSection.className = "active";
+    rpsSect.className = "active";
     if (opponentCheck.checked && rpsVersion) {
-        rpsSection.className = "active";
-        rpslsSection.className = "inactive";
+        rpsSect.className = "active";
+        rpslsSect.className = "inactive";
         hasOpponent = true;
     }
     else if (opponentCheck.checked && !rpsVersion) {
-        rpsSection.className = "active";
-        rpslsSection.className = "active";
+        rpsSect.className = "active";
+        rpslsSect.className = "active";
         hasOpponent = true;
     }
     else {
-        rpsSection.className = "inactive";
-        rpslsSection.className = "inactive";
+        rpsSect.className = "inactive";
+        rpslsSect.className = "inactive";
         hasOpponent = false;
     }
 
