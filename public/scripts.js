@@ -2,65 +2,92 @@
 // check out the coin-server example from a previous COMP 426 semester.
 // https://github.com/jdmar3/coinserver
 
-function onPageLoad() {
-    document.getElementById("shots").style.display = "none"
-    document.getElementById("results").style.display = "none"
-
-}
-
-function toggleShots() {
-    let oppCheck = document.getElementById('opponent');
-    let rpslsCheck = document.getElementById("rpsls");
-    if (oppCheck.checked == true) {
-        document.getElementById("shots").style.display = "block"
-        if (rpslsCheck.checked == false) {
-            document.getElementById("rpslsShots").style.display = "none"
-        } else {
-            document.getElementById("rpslsShots").style.display = "inline"
-        }
-    } else {
-        document.getElementById("shots").style.display = "none"
-    }
-}
-
-function startOver() {
-    document.getElementById("input").reset()
-    document.getElementById("shots").style.display = "none"
-    document.getElementById("results").style.display = "none"
-}
-
-async function playGame () {
-    let gameType = "rps"
-    for (var x of document.getElementsByName("gameType")) {
-        if (x.checked == true) { gameType = x.id }
-    }
+function unhideOpts() {
+    let check = document.getElementById('opponent');
+    let gameType = document.querySelector('input[name="game-type"]:checked').id;
     
-    let shot = "rock"
-    for (var x of document.getElementsByName("shot")) {
-        if (x.checked == true) { shot = x.id }
+    if (check.checked && gameType === 'rpsls') {
+        $('.move').show();
+        $('.rpsls').show();
+        $('.rps').show();
+      } else if (check.checked && gameType === 'rps') {
+        $('.move').show();
+        $('.rps').show();
+        $('.rpsls').hide();
+      } else {
+        $('.move').hide();
+      }
+      console.log(gameType);
+      console.log(check.checked);
+}
+
+function resetClear() {
+    document.getElementById('userinput').reset();
+    $('#results').hide();
+    $('#userinput').show();
+    $('#play').show();
+    unhideOpts();
+}
+
+async function startGame() {
+    $('#userinput').hide();
+    $('#play').hide();
+
+    let gameType = $('input[type=radio][name=game-type]:checked').val();
+    let vsOpponent = document.querySelector('#opponent').checked;
+    let shot = $('input[type=radio][name=move]:checked').val();
+
+    let baseurl = window.location.href + 'app/'
+    let url = baseurl + gameType + '/play'
+
+    if (vsOpponent) {
+        url += '/' + shot
     }
-
-    let baseurl = window.location.href.concat('app/')
-    let url = baseurl.concat(gameType.concat('/play/'))
-
-    let oppCheck = document.getElementById('opponent').checked
-    if (oppCheck) { url = url.concat(shot) }
 
     let response = await fetch(url)
     let result = await response.json()
 
-    resultString = 'You selected ' + result.player
-
-    document.getElementById("shotImg").setAttribute("src", "img/"+result.player+".jpg");
-    document.getElementById("shotImgLab").style.display = "block"
-    document.getElementById("shotImg").style.display = "inline"
-    document.getElementById("oppShotImg").style.display = "none"
-    document.getElementById("oppShotImgLab").style.display = "none"
-
-    if (oppCheck) {
-        resultString = resultString + ' and your opponent selected ' + result.opponent + '. Result: ' + result.result;
+    if (vsOpponent) {
+        $('#results').show();
+        document.getElementById("results").innerText = 'You: ' + result.player +
+            '\n\nYour opponent: ' + result.opponent +
+            '\n\nResult: you ' + result.result.toUpperCase() +'\n';
+    } else {
+        $('#results').show();
+        document.getElementById("results").innerText = 'Your random draw is: ' + result.opponent;
     }
+    console.log(url)
+    console.log(result)
+    console.log(result.result)
 
-    document.getElementById("results").innerText = resultString
-    document.getElementById("results").style.display = "block"
+
+}
+
+function viewrules() {
+    document.getElementById("rules").innerText =
+    `Rules for Rock Paper Scissors:
+    - Scissors CUTS Paper
+    - Paper COVERS Rock
+    - Rock CRUSHES Scissors
+    
+    Rules for the Lizard-Spock Expansion of Rock Paper Scissors:
+    - Scissors CUTS Paper
+    - Paper COVERS Rock
+    - Rock SMOOSHES Lizard
+    - Lizard POISONS Spock
+    - Spock SMASHES Scissors
+    - Scissors DECAPITATES Lizard
+    - Lizard EATS Paper
+    - Paper DISPROVES Spock
+    - Spock VAPORIZES Rock
+    - Rock CRUSHES Scissors`;
+    document.getElementById("rules-btn").hidden = true;
+    document.getElementById("rules").hidden = false;
+    document.getElementById("hide-rules-btn").hidden = false;
+}
+
+function hiderules() {
+    document.getElementById("rules").hidden = true;
+    document.getElementById("hide-rules-btn").hidden = true;
+    document.getElementById("rules-btn").hidden = false;
 }
