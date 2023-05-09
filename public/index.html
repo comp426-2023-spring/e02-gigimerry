@@ -1,19 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
         <meta charset="UTF-8">
-        <title>RPS(LS)</title>
         <!-- Link to your script file(s) and CSS in here somewhere -->
-        <link rel="stylesheet" type="text/css" href="./styles.css">
-        <script src="./scripts.js"></script>
+        <script src="scripts.js"></script>
+        <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <h1>ROCK PAPER SCISSORS</h1>
+        <div class="left">
+            <strong>PLAY RPS OR RPSLS?:</strong>
+            <br>
+            <input type="radio" id="rpsSelect" name="version" onclick="rpsSelected()" value="RPS">
+            <label for="rpsSelect">PLAY ROCK PAPER SCISSORS</label><br>
+            <input type="radio" id="rpslsSelect" name="version" onclick="rpslsSelected()" value="RPSLS">
+            <label for="rpslsSelect">PLAY ROCK PAPER SCISSOR LIZARD SPOCK!</label><br>
+            <br>
+            <input type="checkbox" id="opponent" name="opponent" onchange="opponentChange()" value="Opponent">
+            <label for="opponent">PLAY AGAINST AN OPPONENT?</label><br>
+            <br>
+            <div id="rps" class="inactive">
+                <strong>WHAT'S YOUR MOVE?</strong>
+                <br>
+                <input type="radio" id="rock" name="move" value="rock">
+                <label for="rock">ROCK</label><br>
+                <input id="paper" type="radio" name="move" value="paper">
+                <label for="paper">PAPER</label><br>
+                <input id="scissors" type="radio" name="move" value="scissors">
+                <label for="scissors">SCISSORS</label><br>
+            </div>
+            <div id="rpsls" class="inactive">
+                <input type="radio" id="lizard" name="move" value="lizard">
+                <label for="lizard">LIZARD</label><br>
+                <input type="radio" id="spock" name="move" value="spock">
+                <label for="spock">SPOCK</label><br>
+            </div>
+            <br>
+        </div>
 
-        
-    <!-- Your interface markup goes here -->
-    <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
+        <button type="button" id="play" onclick="play()">PLAY!</button>
+        <button type="button" id="reset" onclick="reset()">RESET</button>
+        <button type="button" class="rules" onclick="openRules()">OPEN RULES</button>
 
+        <div id="modal" class="popup">
+            <div class="results">
+                <span onclick="closepopup()" class="close">&times;</span>
+                <div class="inactive" id="opponentGame">
+                    <p id="playerMove"></p>
+                    <p id="opponentMove"></p>
+                    <p id="winner"></p>
+                </div>
+                <p class="inactive" id="rand_move"></p>
+                <div class="inactive" id="rules">
+                    <strong>RULES FOR RPS</strong>
+                    <p>Scissors CUTS Paper</p>
+                    <p>Paper COVERS Rock</p>
+                    <p>Rock CRUSHES Scissors</p>
+                    <strong>Rules for RPSLS</strong>
+                    <p>Scissors CUTS Paper</p>
+                    <p>Paper COVERS Rock</p>
+                    <p>Rock SMOOSHES Lizard</p>
+                    <p>Lizard POISONS Spock</p>
+                    <p>Spock SMASHES Scissors</p>
+                    <p>Scissors DECAPITATES Lizard</p>
+                    <p>Lizard EATS Paper</p>
+                    <p>Paper DISPROVES Spock</p>
+                    <p>Spock VAPORIZES Rock</p>
+                    <p>Rock CRUSHES Scissors</p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
-
