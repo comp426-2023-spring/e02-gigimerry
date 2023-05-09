@@ -1,16 +1,8 @@
 body {
-    background-color: #cdebc5;
+    background-color: #81a9ff;
     align-items: center;
     justify-content: center;
     text-align: center;
-}
-
-.active {
-    display: block;
-}
-
-.inactive {
-    display: none;
 }
 
 button {
@@ -28,11 +20,11 @@ button {
     height: 100%;
     overflow: auto;
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0);
 }
 
 .results {
-    background-color: #e6d9cb;
+    background-color: #8787ff;
     margin: auto;
     padding: 20px;
     border: 1px solid #231a10;
@@ -40,7 +32,7 @@ button {
 }
 
 .close {
-    color: #aaaaaa;
+    color: #f98d8d;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -57,4 +49,12 @@ button {
     width: 400px;
     margin: auto;
     text-align: left;
+}
+
+.active {
+    display: block;
+}
+
+.inactive {
+    display: none;
 }
