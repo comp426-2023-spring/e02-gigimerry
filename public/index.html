@@ -10,12 +10,12 @@
     <body>
         <h1>ROCK PAPER SCISSORS</h1>
         <div class="left">
-            <strong>Select your version of the game:</strong>
+            <strong>SELECT RPS OR RPSLS:</strong>
             <br>
             <input type="radio" id="rpsSelect" name="version" onclick="rpsSelected()" value="RPS">
-            <label for="rpsSelect">Play Rock Paper Scissors</label><br>
+            <label for="rpsSelect">PLAY ROCK PAPER SCICSSORS</label><br>
             <input type="radio" id="rpslsSelect" name="version" onclick="rpslsSelected()" value="RPSLS">
-            <label for="rpslsSelect">Play Rock Paper Scissors Lizard Spock</label><br>
+            <label for="rpslsSelect">PLAY ROCK PAPER SCISSORS LIZARD SPOCK!</label><br>
             <br>
             <input type="checkbox" id="opponent" name="opponent" onchange="opponentChange()" value="Opponent">
             <label for="opponent">Play against an opponent</label><br>
@@ -38,41 +38,8 @@
             </div>
             <br>
         </div>
-
         <button type="button" id="play" onclick="play()">Play!</button>
         <button type="button" id="reset" onclick="reset()">Reset</button>
-        <button type="button" class="rules" onclick="openRules()">Rules</button>
-
-        <div id="modal" class="popup">
-            <div class="results">
-                <span onclick="closepopup()" class="close">&times;</span>
-                <div class="inactive" id="opponentGame">
-                    <p id="playerMove"></p>
-                    <p id="opponentMove"></p>
-                    <p id="winner"></p>
-                </div>
-                <p class="inactive" id="rand_move"></p>
-                <div class="inactive" id="rules">
-                    <strong>Rules for Rock Paper Scissors</strong>
-                    <p>Scissors CUTS Paper</p>
-                    <p>Paper COVERS Rock</p>
-                    <p>Rock CRUSHES Scissors</p>
-                    <strong>Rules for Rock Paper Scissors Lizard Spock</strong>
-                    <p>Scissors CUTS Paper</p>
-                    <p>Paper COVERS Rock</p>
-                    <p>Rock SMOOSHES Lizard</p>
-                    <p>Lizard POISONS Spock</p>
-                    <p>Spock SMASHES Scissors</p>
-                    <p>Scissors DECAPITATES Lizard</p>
-                    <p>Lizard EATS Paper</p>
-                    <p>Paper DISPROVES Spock</p>
-                    <p>Spock VAPORIZES Rock</p>
-                    <p>Rock CRUSHES Scissors</p>
-                </div>
-            </div>
-        </div>
-    <!-- Your interface markup goes here -->
-    <!-- For interface examples, look in the `/examples/` directory in the root of your starter code repo. -->
-
+        
     </body>
 </html>
