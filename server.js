@@ -73,7 +73,6 @@ app.get('/app', (req, res) => {
     res.status(200).send('200 OK').end();
 });
 
-
 app.get('/app/rps', (req, res) => {
     res.status(200).send(JSON.stringify(rps(req.body.shot))).end();
 })
@@ -101,7 +100,6 @@ app.get('/app/rps/play/:shot', (req, res) => {
 app.get('/app/rpsls/play/:shot', (req, res) => {
     res.status(200).send(JSON.stringify(rpsls(req.params.shot))).end();
 })
-
 
 // Create and update access log
 // The morgan format below is the Apache Foundation combined format but with ISO8601 dates
